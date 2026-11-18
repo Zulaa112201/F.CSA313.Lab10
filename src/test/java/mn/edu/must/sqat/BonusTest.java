@@ -6,10 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-/**
- * Part B4. Stage 1 (commit "B all-defs"): t01, t02. Stage 2 (commit "B all-DU-pairs"): t03..t11.
- * Line numbers refer to DataFlowTargets.java. Pair IDs (AT1.., SC1.. ) are the ones in README.md.
- */
 class BonusTest {
 
     @Test
@@ -76,5 +72,12 @@ class BonusTest {
     @DisplayName("t11: streak longer than 5. Pairs: AT1 AT3 AT4 TH1 TH4 AV2 PR1 PR4 PR6 ST1 ST2 ST4 ST5 BE2 BE6 BE8 SC3 SC5")
     void t11_longStreakSeven() {
         assertEquals(8, DataFlowTargets.bonus(new int[] {1, 1, 1, 1, 1, 1, 1}, 3));
+    }
+
+    @Test
+    @DisplayName("t12 kills mutant M2 (best = present): isolated days only, so the real longest streak is 2; "
+            + "at the update on the last day present=6 differs from streak=2. No new DU pair")
+    void t12_m2Killer_presentDiffersFromStreak() {
+        assertEquals(0, DataFlowTargets.bonus(new int[] {1, 0, 1, 0, 1, 0, 1, 0, 1, 1}, 7));
     }
 }
